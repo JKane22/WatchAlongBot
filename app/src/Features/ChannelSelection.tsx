@@ -8,11 +8,13 @@ import { useNavigate } from "react-router-dom";
 
 // Components / Wrappers
 import ChannelSelectComponent from "./Components/ChannelSelectComponent";
+import Navbar from "./Components/Navbar";
 
 // eslint-disable-next-line no-empty-pattern
 export default function ChannelSelection({}) {
   const [user, setUser] = React.useState(null);
   const [guilds, setGuilds] = React.useState(null);
+  const [NotIncluded, setBotNotIncluded] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const navigate = useNavigate();
 
@@ -23,7 +25,8 @@ export default function ChannelSelection({}) {
         return getGuilds();
       })
       .then(({ data }) => {
-        setGuilds(data);
+        setGuilds(data[1]);
+        setBotNotIncluded(data[0]);
         setLoading(false);
       })
       .catch((err) => {
@@ -38,12 +41,21 @@ export default function ChannelSelection({}) {
     return <div>Loading...</div>;
   } else {
     return (
-      <div className="element">
-        <h1 style={{ paddingBottom: "100px", fontWeight: "bold" }}>
-          Channel Selection
-        </h1>
-        <h1>🎉 Choose a server to start a WatchAlong Party! 🎉</h1>
-        <ChannelSelectComponent guilds={guilds} user={user} />
+      <div
+        className="element"
+        style={{
+          backgroundColor: "#212529",
+          background: "cover",
+          height: "100vh"
+        }}
+      >
+        <Navbar user={user} />
+        <h1 className="text-white font-bold text-center"> Select a Server</h1>
+        <ChannelSelectComponent
+          BotNotIncluded={NotIncluded}
+          guilds={guilds}
+          user={user}
+        />
       </div>
     );
   }

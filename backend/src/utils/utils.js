@@ -3,10 +3,4 @@ function getSameGuilds(userGuilds, botGuilds) {
     return userGuilds.filter((guild) => botGuilds.find((botGuild) => (botGuild.id === guild.id) && (guild.permissions & 0x20) === 0x20))
 }
 
-// Creating guild data
-function createGuildData(guild) {
-    const findGuild = guildData.find({ guildId: guild.id });
-    console.log('Called');
-}
-
-module.exports = { getSameGuilds, createGuildData };
+module.exports = { getSameGuilds };

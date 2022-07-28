@@ -4,30 +4,20 @@ import "../Styles/Features/Home.css";
 // Authentication
 
 const Home = () => {
-  const login = () => window.location.href = 'http://localhost:3001/api/auth/discord';
+  const login = () =>
+    (window.location.href = "http://localhost:3001/api/auth/discord");
   return (
     <div className="Header">
-      <h1 style={{ fontWeight: "bold", fontSize: "20px", color: "white" }}>
-        {" "}
-        Looking to WatchAlong with Us?{" "}
-      </h1>
-      <button
-        style={{
-          width: "150px",
-          height: "50px",
-          backgroundColor: "white",
-          fontWeight: "bold",
-          border: "10px",
-          borderRadius: "10px",
-          borderColor: "blue",
-        }}
-        onClick={() => {
-          login();
-        }}
-      >
-        {" "}
-        Login with Discord!{" "}
-      </button>
+      <div style={{ color: 'white', fontWeight: 'bold' }} className="Header-title">
+        <h1>WatchAlong</h1>
+
+        <p>
+          A Discord bot that allows you to watch a video together with your
+          friends.
+        </p>
+
+        <button onClick={login}>Login</button>
+      </div>
     </div>
   );
 };

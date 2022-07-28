@@ -18,7 +18,10 @@ router.get('/guilds', async (req, res) => {
     if (user) {
         const userGuilds = user.get('discordGuilds');
         const sameGuilds = getSameGuilds(userGuilds, guildsFetched);
-        res.send(sameGuilds);
+
+        // Guilds that bot isn't in but can be added to with the users permissions
+        const userGuildsBotNotIncluded = userGuilds.filter(guild => !sameGuilds.includes(guild) && (guild.permissions & 0x20) === 0x20);
+        res.send([userGuildsBotNotIncluded, sameGuilds]);
     } else {
         res.send(401);
     };
@@ -33,8 +36,8 @@ router.get('/guild/create', async (req, res) => {
 
     // If it doesn't exist, create it
     if (!guild) {
-       const newGuild = new Guild({ 
-            guildId: data.id, 
+        const newGuild = new Guild({
+            guildId: data.id,
             guildName: data.name,
             guildIcon: data.icon ? data.icon : null
         });
@@ -44,6 +47,15 @@ router.get('/guild/create', async (req, res) => {
     };
 
     if (guild) {
+        if (data.name !== guild.guildName || data.icon !== guild.guildIcon) {
+            const updatedGuild = await Guild.findOneAndUpdate({ guildId: data.id }, {
+                guildName: data.name,
+                guildIcon: data.icon ? data.icon : null
+            })
+
+            await updatedGuild.save();
+        };
+
         res.sendStatus(200);
     };
 })
