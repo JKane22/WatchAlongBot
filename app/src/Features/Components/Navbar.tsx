@@ -16,9 +16,8 @@ function classNames(...classes: string[]) {
 }
 
 export default function NavbarMain({ user }: { user: any }) {
-  const InviteBot = () =>
-    (window.location.href =
-      "https://discord.com/api/oauth2/authorize?client_id=1000186778101235743&permissions=8&scope=bot%20applications.commands");
+  //TODO: Needs to be Updated (Env Variable Needed)
+  const InviteBot = () => (window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1000186778101235743&permissions=8&scope=bot%20applications.commands");
   return (
     <Disclosure as="nav">
       {({ open }) => (

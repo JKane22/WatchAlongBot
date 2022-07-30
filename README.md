@@ -18,9 +18,7 @@
   * Simple Database for Saving Data
 
 * Styling 
-  * Color Schemes
-    { White | Light Blue }
-
+  * [Tailwind](https://tailwindui.com/)
 
 ### Workflow: 
 * Backend Setup
@@ -39,15 +37,18 @@
     * [X] Selecting a Channel | With Data and All being transferred
     * [X] Add bot button that will allow users to invite the bot to a guild.
     * [X] Dropdown on click of the Username and Discriminator.
-    * [] Create UI for Dashboard. (Opening a Room for Videos to get pushed too, Side bar that shows Current Guilds and the Abilty to switch the guilds with a dropdown.)
-* Updates (Not important at this Stage)
-    * [X] Make the Cards(Server List) break every 3rd server on the screen.
-    * [] Auto Login with Backend if we have cookies
-    * [] Info about WatchAlong and How to use it.
-    * [] Creating UI for the Home page
+    * [] Create UI for Dashboard.
+        * [] ReactPlayer for the Videos
+        * [] Queue'd Videos on the right hand side
+        * [] Buttons to control (Worse case: We can just use built in controls for the video) [Volume, Play/Pause, Skip]
 * Bot Setup 
     * [] Allow for the bot to go online with the Server.
     * [] Allow for the bot to manage Database with the backend
     * Events 
       * [] Guild Create (Create a Channel for the Video to be sent too)
       * [] Message Create (If that message is sent in the bots channel, filter the link or message)
+* Updates (Not important at this Stage)
+    * [X] Make the Cards(Server List) break every 3rd server on the screen.
+    * [] Auto Login with Backend if we have cookies
+    * [] Info about WatchAlong and How to use it.
+    * [] Creating UI for the Home page
