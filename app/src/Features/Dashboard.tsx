@@ -4,10 +4,29 @@ import { getGuildData } from "../API/auth";
 
 import { useNavigate } from "react-router-dom";
 
+// Components
+import DashboardNavbar from "../Features/Components/DashboardNavbar";
+import LoadingScreen from "../Features/Components/Extras/loading";
+
+// API
+import { UpdateRoomStatus, CheckRoomStatus } from "../API/auth";
+import MediaPlayer from "./Components/MediaPlayer";
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(true);
   const [guildInfo, setGuildInfo] = React.useState({ name: "", id: "" });
+  const [user, setUser] = React.useState({
+    user: {
+      discordUsername: "",
+      discordId: "",
+      discordDiscriminator: "",
+      discordAvatar: "",
+    },
+  });
+
+  // Checking the room status
+  const [roomStatus, setRoomStatus] = React.useState(false);
 
   React.useEffect(() => {
     const id = window.location.pathname.split("/")[2];
@@ -20,27 +39,73 @@ export default function Dashboard() {
         console.log(err);
         navigate("/");
       });
+    CheckRoomStatus(id).then((res) => {
+      if (res.status.valueOf() === 200) {
+        setRoomStatus(true);
+      } else {
+        setRoomStatus(false);
+      }
+    });
+
+    // Get the User info from the local storage
+    const GrabUserInfo = localStorage.getItem("userInfo") || "";
+    const FinalUserInfo = JSON.parse(GrabUserInfo);
+
+    setUser(FinalUserInfo);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        className="element bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundColor: "#212529",
+          background: "cover",
+          height: "100vh",
+        }}
+      >
+        <LoadingScreen />
+      </div>
+    );
   } else {
     return (
-      <div className="element">
-        <h1
-          style={{
-            paddingBottom: "100px",
-            fontWeight: "bold",
-            fontFamily: "sans-serif",
-          }}
-        >
-          Dashboard
-        </h1>
-        <h1>
+      <div
+        className="element bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundColor: "#212529",
+          background: "cover",
+          height: "100vh",
+        }}
+      >
+        <DashboardNavbar user={user} />
+        <h1 className="text-white font-bold text-center">
           🎉 Welcome {guildInfo.name ? guildInfo.name : null} to WatchAlong! 🎉
         </h1>
+        {roomStatus === false ? (
+          <div className="flex justify-center">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 h-12 text-white font-bold py-2 px-4 rounded"
+              onClick={async () =>
+                UpdateRoomStatus(
+                  guildInfo.id,
+                  true,
+                  user.user.discordUsername,
+                  user.user.discordId
+                )
+              }
+            >
+              Open Room
+            </button>
+          </div>
+        ) : (
+          <div className="flex justify-center">
+            <MediaPlayer roomStatus={roomStatus} guildInfo={guildInfo} />
+          </div>
+        )}
       </div>
     );
   }
 }
+
+// UpdateRoomStatus(guildInfo.id, true, user.user.discordUsername, user.user.discordId);

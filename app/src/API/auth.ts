@@ -27,3 +27,35 @@ export function getGuildData(guildId: string) {
         withCredentials: true
     })
 }
+
+// Updating the Room Status in the database
+export function UpdateRoomStatus(guildId: string, status: boolean, hostName: any, hostId: any) {
+    return axios.get('http://localhost:3001/api/discord/update/roomStatus', { 
+        withCredentials: true,
+        params: {
+            guildId: guildId,
+            status: status,
+            hostName: hostName,
+            hostId: hostId
+        }
+    })
+}
+
+// checking the room status in the database
+export function CheckRoomStatus(guildId: string) {
+    return axios.get('http://localhost:3001/api/discord/check/roomStatus', {
+        withCredentials: true,
+        params: {
+            guildId: guildId
+        }
+    })
+}
+
+export function CheckQueue(guildId: string) {
+    return axios.get('http://localhost:3001/api/discord/check/queue', {
+        withCredentials: true,
+        params: {
+            guildId: guildId
+        }
+    })
+}

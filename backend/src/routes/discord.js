@@ -12,7 +12,7 @@ const { getSameGuilds } = require('../utils/utils');
 
 router.get('/guilds', async (req, res) => {
     const guildsFetched = await getBotGuilds();
-
+    
     // Find User from Database
     const user = await User.findOne({ discordId: req.user.discordId });
     if (user) {
@@ -39,7 +39,13 @@ router.get('/guild/create', async (req, res) => {
         const newGuild = new Guild({
             guildId: data.id,
             guildName: data.name,
-            guildIcon: data.icon ? data.icon : null
+            guildIcon: data.icon ? data.icon : null,
+            guildWatchAlong: { 
+                "Watching": false,
+                "Queue": [],
+                "HostName": null,
+                "HostId": null
+            }
         });
         await newGuild.save();
 
@@ -76,5 +82,43 @@ router.get('/guild/:id', async (req, res) => {
         res.send(guild);
     };
 });
+
+router.get('/added', (req, res) => {
+    const data = req.query;
+    res.redirect(`http://localhost:3000/dashboard/${data.guild_id}`);
+});
+
+
+// Updating the Room Status in the Database 
+router.get('/update/roomStatus', async (req, res) => {
+    const data = req.query;
+
+    // Find the guild in the database
+    const guild = await Guild.findOneAndUpdate({ guildId: data.guildId }, {
+        guildWatchAlong: { 
+            "Watching": data.status,
+            "Queue": [],
+            "HostName": data.hostName,
+            "HostId": data.hostId
+        }
+    })
+
+    guild.save()
+    res.sendStatus(200);
+})
+
+// Checking the Room Status in the Database
+router.get('/check/roomStatus', async (req, res) => {
+    const data = req.query;
+
+    // Find the guild in the database
+    const guild = await Guild.findOne({ guildId: data.guildId });
+
+    if (guild.guildWatchAlong.Watching === true) {
+        res.sendStatus(200)
+    } else { 
+        res.sendStatus(204)
+    };
+})
 
 module.exports = router;

@@ -18,7 +18,22 @@ const RequiredArray = {
 const GuildSchema = new mongoose.Schema({
     guildId: RequiredString,
     guildName: RequiredString,
-    guildIcon: NotRequiredString
+    guildIcon: NotRequiredString,
+    guildWatchAlong: {
+        "Watching": {
+            type: Boolean,
+            default: false
+        },
+        "Queue": [],
+        "HostName": {
+            type: String,
+            default: null 
+        },
+        "HostId": {
+            type: String,
+            default: null
+        }
+    }
 });
 
 module.exports = mongoose.model('Guild', GuildSchema);

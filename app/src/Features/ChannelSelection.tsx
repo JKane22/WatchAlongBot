@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 // Components / Wrappers
 import ChannelSelectComponent from "./Components/ChannelSelectComponent";
 import Navbar from "./Components/Navbar";
+import LoadingScreen from "./Components/Extras/loading";
 
 // eslint-disable-next-line no-empty-pattern
 export default function ChannelSelection({}) {
@@ -38,19 +39,34 @@ export default function ChannelSelection({}) {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
-  } else {
     return (
       <div
-        className="element"
+        className="element bg-cover bg-center bg-no-repeat"
         style={{
           backgroundColor: "#212529",
           background: "cover",
-          height: "100vh"
+          height: "100vh",
         }}
       >
-        <Navbar user={user} />
-        <h1 className="text-white font-bold text-center"> Select a Server</h1>
+        <LoadingScreen />
+      </div>
+    );
+  } else {
+    return (
+      <div
+        className="element bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundColor: "#212529",
+          background: "cover",
+          backgroundRepeat: "repeat",
+          height: "100vh",
+        }}
+      >
+        <Navbar user={user} key="dashboard" />
+        <h1 className="text-white font-bold text-center pt-8">
+          {" "}
+          Select a Server
+        </h1>
         <ChannelSelectComponent
           BotNotIncluded={NotIncluded}
           guilds={guilds}

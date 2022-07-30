@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 // Create data for the channel select component
 import { createGuildData } from "../../API/auth";
-import GuildWarning from "../../Features/Components/CreateGuildWarning";
 
 export default function ChannelSelectComponent({
   guilds,
@@ -18,8 +17,9 @@ export default function ChannelSelectComponent({
   BotNotIncluded: any;
 }) {
   const navigate = useNavigate();
+  const InviteBot = (guild: any, user: any) => (window.location.href = `https://discord.com/api/oauth2/authorize?client_id=1000186778101235743&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fapi%2Fdiscord%2Fadded&response_type=code&scope=identify%20bot%20applications.commands&guild_id=${guild.id}`);
   return (
-    <div className="relative grid grid-cols-3 m-auto justify-center gap-4 pl-2 pr-2 max-w-screen-lg pt-10">
+    <div className="relative grid grid-cols-3 m-auto justify-center gap-4 pl-2 pr-2 max-w-screen-lg pt-12">
       {guilds.map((guild: any) => (
         <div key={guild.id}>
           <Card
@@ -65,6 +65,19 @@ export default function ChannelSelectComponent({
                   fontWeight: "bold",
                 }}
                 onClick={async () => {
+                  // Setting LocalStorage for Guild/User
+                  if (localStorage.getItem("guildInfo") !== null) {
+                    localStorage.removeItem("guildInfo");
+                    localStorage.removeItem("userInfo");
+
+                    // Update the Guild and User Info in LocalStorage
+                    localStorage.setItem("guildInfo", JSON.stringify(guild));
+                    localStorage.setItem("userInfo", JSON.stringify(user));
+                  } else {
+                    localStorage.setItem("guildInfo", JSON.stringify(guild));
+                    localStorage.setItem("userInfo", JSON.stringify(user));
+                  };
+
                   await createGuildData(guild);
                   navigate(`/dashboard/${guild.id}`);
                 }}
@@ -114,16 +127,16 @@ export default function ChannelSelectComponent({
                 {guild.name}
               </Card.Title>
               <Button
-                variant="warning"
+                variant="secondary"
                 style={{
                   color: "white",
                   fontWeight: "bold",
                 }}
                 onClick={async () => {
-                  console.log("Need to be added to server!")
+                  InviteBot(guild, user)
                 }}
               >
-                Invite to Server!
+                Configure Server
               </Button>
             </Card.Body>
           </Card>
@@ -132,5 +145,3 @@ export default function ChannelSelectComponent({
     </div>
   );
 }
-
-// grid w-72 bg-grey mb-15 
