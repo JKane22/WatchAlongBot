@@ -83,12 +83,6 @@ router.get('/guild/:id', async (req, res) => {
     };
 });
 
-router.get('/added', (req, res) => {
-    const data = req.query;
-    res.redirect(`http://localhost:3000/dashboard/${data.guild_id}`);
-});
-
-
 // Updating the Room Status in the Database 
 router.get('/update/roomStatus', async (req, res) => {
     const data = req.query;
@@ -120,5 +114,20 @@ router.get('/check/roomStatus', async (req, res) => {
         res.sendStatus(204)
     };
 })
+
+// Checking Guild Queue
+router.get('/check/queue', async (req, res) => {
+    const data = req.query;
+
+    // Find the guild in the database
+    const guild = await Guild.findOne({ guildId: data.guildId });
+
+    if (guild.guildWatchAlong.Queue.length > 0) {
+        res.send(guild.guildWatchAlong.Queue)
+    } else {
+        res.send([])
+    };
+})
+
 
 module.exports = router;

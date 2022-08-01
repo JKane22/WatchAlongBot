@@ -17,7 +17,9 @@ function classNames(...classes: string[]) {
 
 export default function NavbarMain({ user }: { user: any }) {
   //TODO: Needs to be Updated (Env Variable Needed)
-  const InviteBot = () => (window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1000186778101235743&permissions=8&scope=bot%20applications.commands");
+  const InviteBot = () =>
+    (window.location.href =
+      "https://discord.com/api/oauth2/authorize?client_id=1000186778101235743&permissions=8&scope=bot%20applications.commands");
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -103,7 +105,7 @@ export default function NavbarMain({ user }: { user: any }) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="z-40 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <h6 className="flex text-md items-center inline-flex text-clip overflow-hidden">
+                      <h6 className="text-md items-center inline-flex text-clip overflow-hidden">
                         Account: {user.user.discordUsername}#
                         {user.user.discordDiscriminator}
                       </h6>
@@ -121,6 +123,7 @@ export default function NavbarMain({ user }: { user: any }) {
                       </Menu.Item>
                       <Menu.Item>
                         {() => (
+                          
                           <a
                             href="/logout"
                             className={

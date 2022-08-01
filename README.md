@@ -52,3 +52,7 @@
     * [] Auto Login with Backend if we have cookies
     * [] Info about WatchAlong and How to use it.
     * [] Creating UI for the Home page
+
+
+* Targeted UI looks (Not important at this Stage)
+  * ![ReactPlayer Controls](https://i.imgur.com/fYsL745.png)

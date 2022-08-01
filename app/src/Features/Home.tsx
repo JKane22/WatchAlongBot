@@ -1,6 +1,8 @@
 // Styles
 import "../Styles/Features/Home.css";
 
+// Auto login if we have cookies for that user
+
 const Home = () => {
   const login = () =>
     (window.location.href = "http://localhost:3001/api/auth/discord");

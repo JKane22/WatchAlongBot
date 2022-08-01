@@ -9,7 +9,7 @@ import DashboardNavbar from "../Features/Components/DashboardNavbar";
 import LoadingScreen from "../Features/Components/Extras/loading";
 
 // API
-import { UpdateRoomStatus, CheckRoomStatus } from "../API/auth";
+import { CheckRoomStatus } from "../API/auth";
 import MediaPlayer from "./Components/MediaPlayer";
 
 export default function Dashboard() {
@@ -82,27 +82,9 @@ export default function Dashboard() {
         <h1 className="text-white font-bold text-center">
           🎉 Welcome {guildInfo.name ? guildInfo.name : null} to WatchAlong! 🎉
         </h1>
-        {roomStatus === false ? (
-          <div className="flex justify-center">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 h-12 text-white font-bold py-2 px-4 rounded"
-              onClick={async () =>
-                UpdateRoomStatus(
-                  guildInfo.id,
-                  true,
-                  user.user.discordUsername,
-                  user.user.discordId
-                )
-              }
-            >
-              Open Room
-            </button>
-          </div>
-        ) : (
-          <div className="flex justify-center">
-            <MediaPlayer roomStatus={roomStatus} guildInfo={guildInfo} />
-          </div>
-        )}
+        <div className="flex flex-col items-center justify-center">
+          <MediaPlayer guildInfo={guildInfo} roomStatus={roomStatus} />
+        </div>
       </div>
     );
   }

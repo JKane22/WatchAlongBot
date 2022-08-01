@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'http://192.168.1.190:3000'],
     credentials: true
 }));
 app.use(session({
@@ -34,6 +34,7 @@ app.use(session({
         mongooseConnection: mongoose.connection
     })
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
