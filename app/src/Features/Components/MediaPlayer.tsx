@@ -2,11 +2,6 @@ import { Button } from "flowbite-react";
 import React from "react";
 import ReactPlayer from "react-player";
 
-// Frostbite
-
-// API
-import { CheckQueue } from "../../API/auth";
-
 export default function MediaPlayer({
   roomStatus,
   guildInfo,
@@ -14,34 +9,29 @@ export default function MediaPlayer({
   roomStatus: boolean;
   guildInfo: any;
 }) {
-  // Settings and Variables for the Media Player
-  const [AutoPlay, setAutoPlay] = React.useState(0);
-
   return (
     <div className="element bg-cover bg-center bg-no-repeat">
       {roomStatus ? (
         <div>
-          <ReactPlayer
-            url={`https://www.twitch.tv/koil`}
-            config={{
-              youtube: {
-                playerVars: {
-                  autoplay: { AutoPlay },
-                  start: 0,
-                  origin: "https://www.youtube.com",
-                  controls: 1,
-                },
-              },
-              twitch: {
-                options: {
-                  autoplay: { AutoPlay },
-                  start: 0,
-                  origin: "https://www.twitch.tv",
-                  controls: 1,
-                },
-              },
-            }}
-          />
+          <div>
+            <div className="gird gird-cols-2 grid-rows-1 gap-2 justify-center flex">
+              <div className="col-span-1">
+                <ReactPlayer
+                  url={"https://www.twitch.tv/xqc"}
+                  controls={true}
+                  volume={0.25}
+                  style={{ width: "150px" }}
+                />
+              </div>
+              <div className="col-span-1 row-span-1">
+                <Button
+                  style={{ borderRadius: "10px" }}
+                >
+                  Check Queue
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       ) : null}
     </div>

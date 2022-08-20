@@ -129,5 +129,12 @@ router.get('/check/queue', async (req, res) => {
     };
 })
 
+// Added to the a new Guild
+router.get('/added', (req, res) => {
+    const data = req.query;
+
+    res.redirect(`http://localhost:3000/dashboard/${data.guild_id}`);
+});
+
 
 module.exports = router;

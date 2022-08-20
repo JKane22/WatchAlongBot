@@ -10,11 +10,6 @@ const NotRequiredString = {
     required: false
 }
 
-const RequiredArray = { 
-    type: Array,
-    required: true
-}
-
 const GuildSchema = new mongoose.Schema({
     guildId: RequiredString,
     guildName: RequiredString,

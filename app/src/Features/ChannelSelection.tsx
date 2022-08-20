@@ -54,7 +54,7 @@ export default function ChannelSelection({}) {
   } else {
     return (
       <div
-        className="element bg-cover bg-center bg-no-repeat"
+        className="element bg-cover bg-center bg-repeat"
         style={{
           backgroundColor: "#212529",
           background: "cover",
@@ -62,11 +62,13 @@ export default function ChannelSelection({}) {
           height: "100vh",
         }}
       >
-        <Navbar user={user} key="dashboard" />
-        <h1 className="text-white font-bold text-center pt-8">
-          {" "}
-          Select a Server
-        </h1>
+        <Navbar user={user} />
+        <div className="text-white text-center pt-8 flex-shrink">
+          <h1 className="font-bold">Select a Server</h1>
+          <h5 className="font-extralight">
+            Some server's may need a set-up before the WatchAlong Party
+          </h5>
+        </div>
         <ChannelSelectComponent
           BotNotIncluded={NotIncluded}
           guilds={guilds}

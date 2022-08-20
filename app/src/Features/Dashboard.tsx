@@ -82,7 +82,7 @@ export default function Dashboard() {
         <h1 className="text-white font-bold text-center">
           🎉 Welcome {guildInfo.name ? guildInfo.name : null} to WatchAlong! 🎉
         </h1>
-        <div className="flex flex-col items-center justify-center">
+        <div>
           <MediaPlayer guildInfo={guildInfo} roomStatus={roomStatus} />
         </div>
       </div>
