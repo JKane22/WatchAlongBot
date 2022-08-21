@@ -129,6 +129,9 @@ export default function NavbarMain({ user }: { user: any }) {
                             className={
                               "block px-4 py-2 text-sm text-red-600 bg-red-200/[0.6] bg-cover font-bold hover:transition ease-out duration-100 hover:font-bold hover:text-red-600"
                             }
+                            onClick={() => {
+                              document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                            }}
                           >
                             Sign out!
                           </a>

@@ -136,5 +136,4 @@ router.get('/added', (req, res) => {
     res.redirect(`http://localhost:3000/dashboard/${data.guild_id}`);
 });
 
-
 module.exports = router;

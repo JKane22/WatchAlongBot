@@ -59,3 +59,13 @@ export function CheckQueue(guildId: string) {
         }
     })
 }
+
+// Dev Settings
+export function DevAddVideo(guildId: string) {
+    return axios.get('http://localhost:3001/api/discord/dev/addVideo', {
+        withCredentials: true,
+        params: {
+            guildId: guildId
+        }
+    })
+}

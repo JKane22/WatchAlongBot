@@ -10,7 +10,9 @@ import LoadingScreen from "../Features/Components/Extras/loading";
 
 // API
 import { CheckRoomStatus } from "../API/auth";
-import MediaPlayer from "./Components/MediaPlayer";
+
+// Dashboard Component
+import DashboardComponent from "../Features/Components/DashboardComponent";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -79,11 +81,8 @@ export default function Dashboard() {
         }}
       >
         <DashboardNavbar user={user} />
-        <h1 className="text-white font-bold text-center">
-          🎉 Welcome {guildInfo.name ? guildInfo.name : null} to WatchAlong! 🎉
-        </h1>
         <div>
-          <MediaPlayer guildInfo={guildInfo} roomStatus={roomStatus} />
+          <DashboardComponent guildInfo={guildInfo} roomStatus={roomStatus} />
         </div>
       </div>
     );

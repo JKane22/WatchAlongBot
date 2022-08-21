@@ -22,12 +22,18 @@ export default function ChannelSelectComponent({
   const navigate = useNavigate();
   const InviteBot = (guild: any) =>
     (window.location.href = `https://discord.com/api/oauth2/authorize?client_id=1000186778101235743&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fapi%2Fdiscord%2Fadded&response_type=code&scope=identify%20bot%20applications.commands&guild_id=${guild.id}`);
+
   return (
     <div className="relative grid grid-cols-3 m-auto justify-items-center gap-4 pl-2 pr-2 max-w-screen-lg pt-12">
       {guilds.map((guild: any) => (
         <div key={guild.id}>
           <Card
-            sx={{ minWidth: 315, maxWidth: 315, maxHeight: 200, minHeight: 200 }}
+            sx={{
+              minWidth: 315,
+              maxWidth: 315,
+              maxHeight: 200,
+              minHeight: 200,
+            }}
             onClick={async () => {
               // Setting LocalStorage for Guild/User.
               if (localStorage.getItem("guildInfo") !== null) {
@@ -41,7 +47,7 @@ export default function ChannelSelectComponent({
                 localStorage.setItem("guildInfo", JSON.stringify(guild));
                 localStorage.setItem("userInfo", JSON.stringify(user));
               }
-
+              
               await createGuildData(guild);
               navigate(`/dashboard/${guild.id}`);
             }}
@@ -63,12 +69,12 @@ export default function ChannelSelectComponent({
                   gutterBottom
                   style={{
                     color: "white",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                   variant="overline"
                   component="div"
                 >
-                  {guild.name}
+                  {guild.name.length > 30 ? guild.name.slice(0, 30) + "..." : guild.name}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -114,12 +120,12 @@ export default function ChannelSelectComponent({
                   gutterBottom
                   style={{
                     color: "white",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                   variant="overline"
                   component="div"
                 >
-                  {guild.name}
+                  {guild.name.length > 30 ? guild.name.slice(0, 30) + "..." : guild.name}
                 </Typography>
               </CardContent>
             </CardActionArea>
