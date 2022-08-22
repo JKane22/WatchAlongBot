@@ -2,6 +2,7 @@ import * as React from "react";
 
 // Changelog
 import ChangelogScreen from "./Extras/ChangeLog";
+import Queue from "./Extras/Queue/Queue";
 
 // MediaPlayer
 import MediaPlayer from "./MediaPlayer";
@@ -13,6 +14,7 @@ export default function DashboardComponent({guildInfo, roomStatus}: {guildInfo: 
       <ChangelogScreen />
       <div> 
         <MediaPlayer guildInfo={guildInfo} roomStatus={roomStatus} />
+        <Queue />
       </div>
     </div>
   );

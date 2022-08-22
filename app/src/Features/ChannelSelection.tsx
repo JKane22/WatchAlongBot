@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 // Components / Wrappers
 import ChannelSelectComponent from "./Components/ChannelSelectComponent";
-import Navbar from "./Components/Navbar";
+import Navbar from "./Components/Extras/Navbars/Navbar";
 import LoadingScreen from "./Components/Extras/loading";
 
 // eslint-disable-next-line no-empty-pattern

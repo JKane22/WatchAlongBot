@@ -1,8 +1,4 @@
-import {
-  Container,
-  FormControlLabel,
-  Switch,
-} from "@mui/material";
+import { Container, FormControlLabel, Switch } from "@mui/material";
 import React from "react";
 import ReactPlayer from "react-player";
 
@@ -24,8 +20,10 @@ export default function MediaPlayer({
                 <ReactPlayer
                   style={{
                     paddingTop: "15px",
+                    position: "relative",
+                    overflow: "hidden",
                   }}
-                  url="https://clips.twitch.tv/MoistRefinedGarageAsianGlow-OW8dm6ZEat1OLSl0"
+                  url={"https://www.youtube.com/watch?v=QH2-TGUlwu4"}
                   controls
                   config={{
                     twitch: {
@@ -39,8 +37,8 @@ export default function MediaPlayer({
                       },
                     },
                   }}
-                  width="750px"
-                  height="437px"
+                  width="1125px"
+                  height="649px"
                 />
                 <div>
                   <Container

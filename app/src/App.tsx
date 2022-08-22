@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 // Components/Features
 import Home from './Features/Home';
 import ChannelSelection from './Features/ChannelSelection';
-import Dashboard from './Features/Dashboard'
+import Dashboard from './Features/Dashboard';
 
 function App() {
   return (

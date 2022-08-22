@@ -5,7 +5,7 @@ import { getGuildData } from "../API/auth";
 import { useNavigate } from "react-router-dom";
 
 // Components
-import DashboardNavbar from "../Features/Components/DashboardNavbar";
+import DashboardNavbar from "./Components/Extras/Navbars/DashboardNavbar";
 import LoadingScreen from "../Features/Components/Extras/loading";
 
 // API
